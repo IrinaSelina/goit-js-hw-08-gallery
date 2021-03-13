@@ -25,13 +25,29 @@ galleryListRef.insertAdjacentHTML('beforeend', markup.join(''));
 galleryListRef.addEventListener('click', openModal);
 window.addEventListener('keydown', onPressArrow);
 function onPressArrow(e) {
-  if (e.key === 'ArrowLeft' && activeIndex > 0) {
-    activeIndex -= 1;
-    modalImgRef.src = gallery[activeIndex].original;
+  if (e.key === 'ArrowLeft') {
+    if (activeIndex > 0) {
+      activeIndex -= 1;
+      return modalImgRef.src = gallery[activeIndex].original;
+    }
+    if (activeIndex === 0){
+      activeIndex = gallery.length - 1;
+    return modalImgRef.src = gallery[activeIndex].original
+    }
+   
   }
-  if (e.key === 'ArrowRight' && activeIndex < gallery.length - 1) {
-    activeIndex += 1;
-    modalImgRef.src = gallery[activeIndex].original;
+
+  if (e.key === 'ArrowRight') {
+    if (activeIndex < gallery.length - 1) {
+      activeIndex += 1;
+      return modalImgRef.src = gallery[activeIndex].original;
+    }
+    if (activeIndex === gallery.length - 1) {
+      activeIndex = 0;
+    return modalImgRef.src = gallery[activeIndex].original;
+    }
+    
+    
   }
 }
 function openModal(e) {
