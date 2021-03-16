@@ -23,8 +23,11 @@ const markup = gallery.map(({ preview, original, description }) => {
 });
 galleryListRef.insertAdjacentHTML('beforeend', markup.join(''));
 galleryListRef.addEventListener('click', openModal);
-window.addEventListener('keydown', onPressArrow);
-function onPressArrow(e) {
+window.addEventListener('keydown', onPressKey);
+function onPressKey(e) {
+  if (e.key === 'Escape') {
+    closeModal();
+  }
   if (e.key === 'ArrowLeft') {
     if (activeIndex > 0) {
       activeIndex -= 1;
@@ -67,11 +70,6 @@ function closeModal() {
   modalRef.classList.remove('is-open');
   modalImgRef.removeAttribute('src');
 }
-window.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeModal();
-  }
-});
 overleyRef.addEventListener('click', closeModal);
 
 
